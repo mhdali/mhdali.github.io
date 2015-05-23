@@ -13,3 +13,4 @@ github_username:  mhdali
 
 # Build settings
 markdown: kramdown
+markdown: redcarpet
