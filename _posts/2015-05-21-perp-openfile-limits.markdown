@@ -4,6 +4,10 @@ title: "perp openfile limits"
 published: true
 ---
 
+# Perp with open file limits
+
+If you're using perp to control your processes instead of `systemd`, `upstart`, `xinit` ...etc, you may hit open file limitation issue, today post is to descripe more deep into this issue and how to solve it.
+
 ##Explaination
 
 `CentOS 6.x` using `upstart` as it's init daemon, so whenever you install `perp` you need to configure it to work under `upstart`. check [] for more info how to implement perp with upstart.
