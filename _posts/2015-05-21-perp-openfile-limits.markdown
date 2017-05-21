@@ -4,9 +4,8 @@ title: "perp openfile limits"
 published: true
 ---
 
-# Perp with open file limits
-
 If you're using perp to control your processes instead of `systemd`, `upstart`, `xinit` ...etc, you may hit open file limitation issue, today post is to descripe more deep into this issue and how to solve it.
+<!--more-->
 
 ##Explaination
 

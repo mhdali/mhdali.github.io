@@ -1,16 +1,19 @@
 # Site settings
-title: MhdAli
-email: ma.alfarra@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  "Hello IT, Did you try turn it off and on again"
-  Mohammad Ali Alfarra, System Administration, Photography, Football player and amoung other things.
+title:               MhdAli
+permalink:           pretty
 
-  Current OS: ArchLinux OS, i3 WM.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://mhdali.github.io" # the base hostname & protocol for your site
-twitter_username: mhdali
-github_username:  mhdali
+# Setup
+tagline:             'Personal Blog'
+description:         'My personal blog and notes, reach me out on Twitter <a href="https://twitter.com/mhdali_" target="_blank">@mhdali_</a>'
+url:                 https://mhdali.github.io/
+baseurl:             ''
+paginate:            5
+excerpt_separator:   <!--more-->
+github:
+  repo:         https://github.com/mhdali
 
-# Build settings
-markdown: kramdown
-markdown: redcarpet
+# About/contact
+author:
+  name:              MhdAli
+  url:               https://twitter.com/mhdali_
+  email:             ma.alfarra@gmail.com
