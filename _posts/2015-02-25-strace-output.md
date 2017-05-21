@@ -6,6 +6,7 @@ categories: strace, tunning
 ---
 
 Every Sysadmin knows about strace command and we're using it in daily basis, but never come to me once to redirect the output to different file for more analyzing "you know strace output it's tremendously fast", so I thought why not use bash redirection
+<!--more-->
 
 {% highlight bash %}
 $ sudo strace -p 4148 > /tmp/strace.out

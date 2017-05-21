@@ -12,6 +12,7 @@ However after I upgraded the package I started seeing this error many times:
 ```
 [ERROR] /usr/sbin/mysqld: Can't open file: '<TABLE_NAME>' (errno: 24 - Too many open files)
 ```
+<!--more-->
 
 ## Why?
 So even if you go and extend the limit on `/etc/security/limits.conf` like this one below **it wont work**
