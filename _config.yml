@@ -1,6 +1,7 @@
 # Site settings
 title:               MhdAli
 permalink:           pretty
+markdown:            kramdown
 
 # Setup
 tagline:             'Personal Blog'
