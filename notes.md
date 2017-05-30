@@ -3,6 +3,11 @@ layout: page
 title: Notes
 ---
 
+* TOC will be output here
+{:toc}
+
+***
+
 General
 -----------------------------
 
@@ -79,6 +84,32 @@ redis-cli SMEMBER resque:queues
 ### Redis resque check how many items in queue
 ```shell
 redis-cli LLEN resque:queue:<queue_name>
+```
+
+### Find git repository on gitlab-ci agent
+```shell
+cd /home/gitlab-runner/builds
+find . -maxdepth 5 -type d -name mcb -ls
+```
+
+### convert timestamp (epoch) to date
+```shell
+date --date @1496183649
+```
+
+### Inspect network for specific packets
+```shell
+ngrep -d any port 8125 <filter to grep for>
+```
+
+### Show UDP statistics
+```shell
+netstat -s --udp
+```
+
+### Citus - kill running query
+```shell
+SELECT pg_terminate_backend(<pid>);
 ```
 
 Sed
@@ -175,3 +206,52 @@ cli53 list | grep 'Name:' | awk -F\" '{print$2}' | xargs -n1 bin/cli53 export -f
 unbound-control flush_zone example.org.
 ```
 
+MySQL
+-----------------------------
+
+### dump one row
+```shell
+mysqldump -t -u root -p mydb account --where="accountid=8242250"
+```
+
+### Delete any duplicate in rows and newer than date
+```shell
+delete n1 FROM blocklist n1, blocklist n2 WHERE n1.listid > n2.listid AND n1.MSISDN = n2.MSISDN AND n1.CreateDate > "2016-11-23 00:00:00";
+```
+
+### one liner command to skip duplicate entry in mysql replication
+```shell
+while `sleep 2`; do mysql -e "show slave status;" | grep "Duplicate entry" && mysql -e "stop slave; SET GLOBAL sql_slave_skip_counter = 1; start slave;" ; done
+```
+
+AWK
+-----------------------------
+
+### Failed HTTP request count - haproxy
+```shell
+awk '{if ($11 >= 500) print }' /var/log/haproxy.log | grep -P ":07:(2|3)\d:(\d+).(\d+)" | awk '{ if ($NF >= "HTTP/1.0") print $(NF-1);else print $NF}' | awk -F"?" '{print $1}' | sort | uniq -c
+```
+
+### Find requests slower than 3 seconds - haproxy
+```shell
+tail -f /var/log/haproxy.log | awk -F '[/ ]' '{if ($17>=3000) print}'
+```
+
+### Grep slow response from server side - haproxy
+```shell
+tail -f /var/log/haproxy.log | awk -F '[/ ]' '{if ($16>=3000) print}'
+```
+
+SaltStack
+-----------------------------
+
+### Refresh gitfs states
+```shell
+salt-run fileserver.update
+```
+
+### Refresh gitfs pillar
+```shell
+salt-run git_pillar.update
+salt '*' saltutil.refresh_pillar
+```
