@@ -6,14 +6,14 @@ date: "2017-05-31 00:00:00 +0800"
 
 ## Why?
 
-We have a DRBD setup that had a split brain situation, our loadbalancer server was running on
-the server that we need to discard it's data, so after we fixed DRBD situation we noticed that
-haproxy config file on disk was corrupted :S
+We had corrupted haproxy config file on disk but the running config was in a correct state.
 
-haproxy was working fine because the way haproxy works it read the config file and import it into
-the memory.
+HAProxy was working fine because the way haproxy works it read the config file from disk
+and import it into the memory.
 
-So we need to restore the config file from the memory, here is what we did:
+So we tried to restore the running config from memory.
+
+Here how we did it...
 
 <!--more-->
 
