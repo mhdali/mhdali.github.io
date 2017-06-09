@@ -224,6 +224,12 @@ delete n1 FROM blocklist n1, blocklist n2 WHERE n1.listid > n2.listid AND n1.MSI
 while `sleep 2`; do mysql -e "show slave status;" | grep "Duplicate entry" && mysql -e "stop slave; SET GLOBAL sql_slave_skip_counter = 1; start slave;" ; done
 ```
 
+### Sync table with percona tools
+```shell
+pt-table-checksum --replicate=percona.checksums --tables <TABLE>  --no-check-replication-filters --no-check-binlog-format --recursion-method=dsn=D=percona,t=dsns h=localhost,u=<USER>,p=<PASSWORD>
+pt-table-sync --print --databases <DB> --tables <TABLE> --check-child-tables --replicate=percona.checksums --sync-to-master h=localhost,u=<USER>,p=<PASSWORD> > /tmp/<DB>-<TABLE>.sql
+```
+
 AWK
 -----------------------------
 
