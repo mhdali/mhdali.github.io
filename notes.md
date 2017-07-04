@@ -267,3 +267,18 @@ salt-run fileserver.update
 salt-run git_pillar.update
 salt '*' saltutil.refresh_pillar
 ```
+
+Apache (httpd)
+-----------------------------
+
+### Allow permission for certain IPs
+```
+    <Location /uploads>
+        Order Deny,Allow
+        Deny from all
+        Allow from localhost
+        Allow from x.x.x.x
+        Allow from y.y.y.y
+        Allow from z.z.z.z
+    </Location>
+```
