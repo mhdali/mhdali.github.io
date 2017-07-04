@@ -112,6 +112,12 @@ netstat -s --udp
 SELECT pg_terminate_backend(<pid>);
 ```
 
+### Find inodes usage on current directory
+```shell
+find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n
+```
+Refrence: https://stackoverflow.com/a/9387415/3238982
+
 Sed
 -----------------------------
 
