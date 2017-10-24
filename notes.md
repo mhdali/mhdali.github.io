@@ -79,7 +79,7 @@ setfacl -Rd -m u:<user>:rwX <dir>
 
 ### Redis resque list all queues
 ```shell
-redis-cli SMEMBER resque:queues
+redis-cli SMEMBERS resque:queues
 ```
 ### Redis resque check how many items in queue
 ```shell
