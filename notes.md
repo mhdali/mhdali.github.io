@@ -292,3 +292,23 @@ https://golang.org/doc/install/source#environment
 ```shell
 env GOOS=linux GOARCH=amd64 go get -v github.com/rubenv/sql-migrate/...
 ```
+
+Git
+-----------------------------
+
+### Ability to manage multiple github accounts
+
+* Generate ssh key and name it for example `personal_id_rds`
+* Edit `~/.ssh/config` and add the following
+```
+Host github.personal
+   HostName github.personal
+   User git
+   IdentityFile ~/.ssh/personal_id_rsa
+```
+* Clone your personal project and edit it's config `.git/config`
+```
+[remote "origin"]
+        url = git@github.personal:mhdali/mhdali.github.io.git
+```
+NOTE: we changed the hostname from `github.com` to `github.personal`.
