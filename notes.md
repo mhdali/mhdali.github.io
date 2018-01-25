@@ -282,3 +282,13 @@ Apache (httpd)
         Allow from z.z.z.z
     </Location>
 ```
+
+Go language
+-----------------------------
+
+### Compile binary for different OS
+List of Operating systems and architecture in
+https://golang.org/doc/install/source#environment
+```shell
+env GOOS=linux GOARCH=amd64 go get -v github.com/rubenv/sql-migrate/...
+```
