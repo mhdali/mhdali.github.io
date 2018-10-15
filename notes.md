@@ -327,20 +327,16 @@ VIM
 ```
 
 
-Terraform
------------------------------
-
-## taint resource
+## Terraform
+### taint resource
 if you have resource with full name as this: 
 module.tst_cluster.module.foo.tfe_variable.role_arn
 ```
 tf taint -module=tst_cluster.foo tfe_variable.key_secret
 ```
 
-KMS
------------------------------
-
-## Find out which key encrypt a text
+## KMS
+### Find out which key encrypt a text
 ```
 aws kms decrypt --ciphertext-blob fileb://<(echo '<ENCRYPTED_BLOB>' | base64 -D) --output text
 ```
