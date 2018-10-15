@@ -312,3 +312,39 @@ Host github.personal
         url = git@github.personal:mhdali/mhdali.github.io.git
 ```
 NOTE: we changed the hostname from `github.com` to `github.personal`.
+
+### Add upstream branch
+```
+git remote add upstream git@github.com:...
+```
+
+VIM
+-----------------------------
+
+### Interactive search and replace
+```
+:%s/old/new/gc
+```
+
+
+Terraform
+-----------------------------
+
+## taint resource
+if you have resource with full name as this: 
+module.tst_cluster.module.foo.tfe_variable.role_arn
+```
+tf taint -module=tst_cluster.foo tfe_variable.key_secret
+```
+
+KMS
+-----------------------------
+
+## Find out which key encrypt a text
+```
+aws kms decrypt --ciphertext-blob fileb://<(echo '<ENCRYPTED_BLOB>' | base64 -D) --output text
+```
+Results will be something like this `key ARN` `ecnrypted text`:
+```
+arn:aws:kms:<REGION>:<ACCOUNT_ID>:key/<KEY_ID>	<ENCRYPTED_TEXT>
+```
