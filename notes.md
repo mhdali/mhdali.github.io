@@ -138,6 +138,21 @@ sed -i '8iif [ "$TARGET" = "trap" ]; then\n  TARGET=_trap\nfi\n' my-*/rc.main
 sed -i 's/apache /root docker run .../g' crontab
 ```
 
+### Only search and replace for specific lines
+```/tmp/file
+four five six
+one
+seve eight nine
+one two three
+one
+ten eleven twelve
+one
+```
+```
+sed -e '/two/s/one/replaced/g' /tmp/file
+```
+Ref: https://www.golinuxhub.com/2017/09/sed-perform-search-and-replace-only-on.html
+
 Strace
 -----------------------------
 ```shell
@@ -254,6 +269,11 @@ tail -f /var/log/haproxy.log | awk -F '[/ ]' '{if ($17>=3000) print}'
 tail -f /var/log/haproxy.log | awk -F '[/ ]' '{if ($16>=3000) print}'
 ```
 
+### Print column before last one
+```
+awk '{print $(NF-1)}'
+```
+
 SaltStack
 -----------------------------
 
@@ -293,6 +313,19 @@ https://golang.org/doc/install/source#environment
 env GOOS=linux GOARCH=amd64 go get -v github.com/rubenv/sql-migrate/...
 ```
 
+### Force return error
+```
+import "errors"
+
+func failFunc() error {
+    return errors.New("Error message")
+}
+```
+Ref: https://stackoverflow.com/a/36311290
+
+### Retry
+Ref: https://godoc.org/github.com/avast/retry-go
+
 Git
 -----------------------------
 
@@ -317,6 +350,12 @@ NOTE: we changed the hostname from `github.com` to `github.personal`.
 ```
 git remote add upstream git@github.com:...
 ```
+
+### ignore directories in git grep
+```
+git grep foobar -- './*' ':!*.java'
+```
+Ref: https://stackoverflow.com/a/30084612
 
 VIM
 -----------------------------
@@ -344,3 +383,81 @@ Results will be something like this `key ARN` `ecnrypted text`:
 ```
 arn:aws:kms:<REGION>:<ACCOUNT_ID>:key/<KEY_ID>	<ENCRYPTED_TEXT>
 ```
+
+BASH
+-----------------------------
+### Remove an item from array
+```
+array=(aardvark baboon "clouded leopard" dolphin)
+while (( ${#array[@]} ))
+do
+  echo "Animal: ${array[0]}"
+  array=( "${array[@]:1}" )
+done
+```
+OR
+```
+array=(aardvark baboon "clouded leopard" dolphin)
+set -- "${array[@]}"
+while (( $# ))
+do
+  echo "Animal: $1"
+  shift
+done
+```
+Ref: https://stackoverflow.com/questions/50846539/shift-in-bash-but-on-arrays-instead-of-arguments
+
+### Check if array is empty
+```
+if [ -z "${ARRAY:-}" ]; then
+  error "Array is empty"
+fi
+```
+define default value in case you're using `-u` option
+
+Ref: https://serverfault.com/a/700936
+
+### Get uniqe value of array
+```
+ARR=("foo" "foo" "bar")
+
+echo "${ARR[@]}" | tr ' ' '\n' | uniq | tr '\n' ' '
+```
+Ref: https://stackoverflow.com/a/13648438
+
+### Append an item to array
+```
+ARR+=("foo")
+ARR+=("bar")
+```
+Ref: https://stackoverflow.com/a/1951523
+
+### Source directory of the script
+```
+dirname "${BASH_SOURCE[0]}"
+```
+Ref: https://stackoverflow.com/a/246128
+
+### Reference a function from script to another
+```second.sh
+function foo {
+  echo "foo"
+}
+```
+```first.sh
+source ./second.sh
+foo
+```
+
+Ref: https://stackoverflow.com/a/10823213
+
+### Get older than 5 folders/files
+```
+ls -tr | head -n -5
+```
+OR
+```
+ls -tr | head -$(($(ls | wc -l)-5))
+```
+
+Ref: https://stackoverflow.com/a/18127758
