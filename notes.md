@@ -461,3 +461,9 @@ ls -tr | head -$(($(ls | wc -l)-5))
 ```
 
 Ref: https://stackoverflow.com/a/18127758
+
+
+Firefox
+-------
+### Force save password for websites that blocks browser from saving passwords
+Ref: https://www.reddit.com/r/firefox/comments/80u9vj/is_there_a_way_to_force_firefox_to_save_password/duyes28?utm_source=share&utm_medium=web2x
