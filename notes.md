@@ -373,6 +373,13 @@ module.tst_cluster.module.foo.tfe_variable.role_arn
 ```
 tf taint -module=tst_cluster.foo tfe_variable.key_secret
 ```
+### if a list not empty then disable the resource
+```
+resource "aws_instance" "foo" {
+  ...
+  count = "${length(var.variable_type_list) > 0 ? 0 : 1}"
+}
+```
 
 ## KMS
 ### Find out which key encrypt a text
@@ -467,3 +474,37 @@ Firefox
 -------
 ### Force save password for websites that blocks browser from saving passwords
 Ref: https://www.reddit.com/r/firefox/comments/80u9vj/is_there_a_way_to_force_firefox_to_save_password/duyes28?utm_source=share&utm_medium=web2x
+
+Jenkins
+-------
+### set global environment within a stage
+You need to put `env.` before the key name of the environment variable.
+```
+stage {
+  ...
+  env.WORKSPACE_EXISTS = true
+}
+```
+Ref: https://stackoverflow.com/questions/53541489/updating-environment-global-variable-in-jenkins-pipeline-from-the-stage-level
+
+### Check the default environment variables of jenkins
+You can access jenkins page to list down the current version default environment variables.
+`https://<jenkins_url>/env-vars.html`
+
+Ref: https://www.theserverside.com/tutorial/Jenkins-environment-variables-list-for-shell-script-build-jobs
+
+
+## Ansible
+
+### Timeout step in ansible
+
+Use `async` to timeout a long running steps in ansible
+
+```
+- name: Execute nodetool repair
+  command: {{cassandra_installation_dir}}/bin/nodetool repair -j 4
+  async: 3600
+  poll: 10
+```
+
+Ref: https://stackoverflow.com/questions/41455002/long-running-command-in-ansible-ending-in-failed-status-with-host-unreachable
